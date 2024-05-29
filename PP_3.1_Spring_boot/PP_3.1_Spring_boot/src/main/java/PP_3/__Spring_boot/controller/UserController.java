@@ -1,4 +1,4 @@
-package web.controller;
+package PP_3.__Spring_boot.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.DAO.UserDaoImpl;
-import web.Model.User;
-import web.Service.UserService;
+import PP_3.__Spring_boot.model.User;
+import PP_3.__Spring_boot.service.UserService;
 
 @Controller
 @RequestMapping(value = "/users")
@@ -51,9 +50,9 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam("id") Integer id) {
-        userService.deleteUser(Integer id);
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }
