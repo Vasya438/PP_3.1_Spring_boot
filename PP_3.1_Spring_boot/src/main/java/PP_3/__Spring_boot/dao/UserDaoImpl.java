@@ -1,9 +1,8 @@
 package PP_3.__Spring_boot.dao;
 
-
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import PP_3.__Spring_boot.model.User;
 
@@ -11,8 +10,14 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
+
+    @Autowired
+    public UserDaoImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public void addUser(User user) {
@@ -21,6 +26,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
+
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 

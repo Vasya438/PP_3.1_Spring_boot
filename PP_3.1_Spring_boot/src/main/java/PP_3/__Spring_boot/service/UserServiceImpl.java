@@ -10,17 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-
+@Transactional(readOnly = true)
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
-
 
     @Override
     public List<User> getAllUsers() {
@@ -32,7 +30,6 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         userDao.addUser(user);
     }
-
 
     @Override
     public User getUser(Integer id) {
